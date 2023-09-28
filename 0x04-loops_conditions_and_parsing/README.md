@@ -1,0 +1,1 @@
+This README file provides an overview of the contents and usage of the Unix 0x04 project, which focuses on Loops, Conditions, and Parsing in Unix-like operating systems. In this project, you will find shell scripts and examples that demonstrate how to use loops, conditions, and parsing techniques in the Unix command line environment.
