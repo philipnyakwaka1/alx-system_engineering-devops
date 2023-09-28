@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #uses until loop to print "Best School" 10 times
 
-n=1
+n=0
 until ((n == 10))
 do
 	echo "Best School"
