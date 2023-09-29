@@ -5,7 +5,6 @@
 
 SIGTERM_handle() {
     echo "I am invincible!!!"
-    exit 0
 }
 
 trap SIGTERM_handler SIGTERM
