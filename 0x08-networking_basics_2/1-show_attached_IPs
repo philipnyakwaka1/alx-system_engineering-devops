@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 # Displays all IPv4 IPs on a machine
 
-ifconfig | sed -n '/inet \([0-9.]\+\) /{s//\1/p}'
+if command -v ifconfig &> /dev/null; then
+    ifconfig | grep -oP '(?<=inet )[\d.]+'
+elif command -v ip &> /dev/null; then
+    ip -o -4 addr show | awk '{print $4}' | cut -d'/' -f1
+    exit 1
+fi
