@@ -7,9 +7,8 @@ if [ "$#" -eq 0 ]; then
 fi
 
 i=0
-while [ "$i" -lt "$#" ]; do
-    arg="${!i}"  # Get the argument at position $i
-    [ "$i" -ge 1 ] && echo -e
-    ping -c 5 "$arg"
-    i=$((i + 1))
+for arg in "$@"; do
+	[[ $i -ge 1 ]] && echo -e
+	ping -c 5 "$arg"
+	i+=1
 done
