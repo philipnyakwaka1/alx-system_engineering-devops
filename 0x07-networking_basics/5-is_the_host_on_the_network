@@ -7,8 +7,8 @@ if [ "$#" -eq 0 ]; then
 fi
 
 i=0
-for arg in "$@"; do
+for x in "$@"; do
 	[[ $i -ge 1 ]] && echo -e
-	ping -c 5 "$arg"
+	ping -c 5 "$x"
 	i+=1
 done
