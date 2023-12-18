@@ -15,14 +15,36 @@ package {'nginx':
 service {'nginx':
     ensure  => running,
     enable  => true,
-    require => Package['nginx],
+    require => Package['nginx'],
+}
+
+# Configure Nginx site
+file { '/etc/nginx/sites-available/default':
+  ensure => file,
+  source => 'puppet:///modules/nginx/default',
+  notify => Service['nginx'],
 }
 
 file { '/var/www/html/index.html':
   content => 'Hello World!',
   require => Package['nginx'],
 }
-exec {'redirect_me':
-  command  => 'sed -i.bak "24i\	rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default',
-  provider => 'shell'
+
+# Create custom 404 page
+file { '/usr/share/nginx/html/custom_404.html':
+  ensure  => file,
+  content => 'Ceci n\'est pas une page',
+}
+
+# Set up 301 redirect for /redirect_me
+nginx::resource::vhost { 'default':
+  ensure      => present,
+  www_root    => '/var/www/html',
+  listen_ip   => '0.0.0.0',
+  listen_port => 80,
+  index_files => ['index.html'],
+  error_page  => ['404 /custom_404.html'],
+  rewrite     => [
+    '^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent',
+  ],
 }
