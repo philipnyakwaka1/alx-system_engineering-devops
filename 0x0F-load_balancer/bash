@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+sed "/server_name _;/s,$,\n\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;\n\terror_page 404 /custom_404.html;\n\tlocation = /custom_404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}," test
+
+sudo sed "/server_name _;/s,$,\n\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;\n\terror_page 404 /custom_404.html;\n\tlocation = /custom_404.html {\n\t\troot /var/www/custom;\n\t\tinternal;\n\t}\n\tadd_header X-Served-By $HOSTNAME;," test

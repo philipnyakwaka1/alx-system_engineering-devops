@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#This script configures a new server to act as a web server
+
+sudo apt-get update -y && sudo apt-get upgrade -y
+sudo apt-get install nginx -y
+sudo ufw allow 80
+sudo mkdir /var/www/custom
+sudo echo "Hello World!" | sudo tee /var/www/custom/index.html
+sudo echo "Ceci n'est pas une page" | sudo tee /var/www/custom/custom_404.html
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/custom
+sudo sed -i 's/default_server//g'  /etc/nginx/sites-available/custom
+sudo sed -i 's-root /var/www/html-root /var/www/custom-' /etc/nginx/sites-available/custom
+sudo sed -i "/server_name _;/s,$,\n\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;\n\terror_page 404 /custom_404.html;\n\tlocation = /custom_404.html {\n\t\troot /var/www/custom;\n\t\tinternal;\n\t}\n\tadd_header X-Served-By $HOSTNAME;," /etc/nginx/sites-available/custom
+sudo ln -s /etc/nginx/sites-available/custom /etc/nginx/sites-enabled/
+sudo rm /etc/nginx/sites-enabled/default
+sudo nginx -t
+sudo service nginx restart
