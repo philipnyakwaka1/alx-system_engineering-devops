@@ -1,0 +1,27 @@
+#!/bin/bash
+#Bash script accepts two arguments: domain and subdomain and then displays information about subdomains.
+if [ $# -eq 1 ]; then
+    domain=$1
+    subdomains=("www" "lb-01" "web-01" "web-02")
+    for subdomain in "${subdomains[@]}"; do
+        record_type=$(dig "$subdomain.$domain" | grep -A1 "ANSWER SECTION" | awk '{print $4}' | tr -d '\n')
+        destination=$(dig +short "$subdomain.$domain" | tr -d '\n')
+        echo "The subdomain $subdomain is a $record_type record and points to $destination"
+    done
+elif [ $# -eq 2 ]; then
+    get_info() {
+        local domain
+        local subdomain
+        local record_type
+        local destination
+        domain=$1
+        subdomain=$2 
+        record_type=$(dig "$subdomain.$domain" | grep -A1 "ANSWER SECTION" | awk '{print $4}' | tr -d '\n')
+        destination=$(dig +short "$subdomain.$domain" | tr -d '\n')
+        echo "The subdomain $subdomain is a $record_type record and points to $destination"
+    }
+    get_info "$1" "$2"
+else
+    echo "Usage: $0 <domain> [subdomain]"
+    exit 1
+fi
