@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #Bash script accepts two arguments: domain and subdomain and then displays information about subdomains.
 if [ $# -eq 1 ]; then
     domain=$1
