@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 #changes hosts IP
-sudo echo -e "\n127.0.0.2 localhost\n8.8.8.8 facebook.com\n" | sudo tee -a "$1"
+sudo echo -e "\n8.8.8.8 facebook.com\n" | sudo tee -a "$1"
 sudo sudo sed -i 's/^[0-9.]\+[[:space:]]\+localhost/127.0.0.2 localhost/' "$1"
