@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 # this script listens to port 98
-nc -l -s localhost -p 98
+sudo nc -l -s localhost -p 98
