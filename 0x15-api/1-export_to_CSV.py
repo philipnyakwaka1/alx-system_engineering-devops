@@ -25,7 +25,7 @@ def my_func():
                    task['completed'], task['title']]
             my_list.append(tmp)
     with open(f'{sys.argv[1]}.csv', 'w') as f:
-        writer = csv.writer(f)
+        writer = csv.writer(f, quoting=csv.QUOTE_ALL)
         writer.writerows(my_list)
 
 
