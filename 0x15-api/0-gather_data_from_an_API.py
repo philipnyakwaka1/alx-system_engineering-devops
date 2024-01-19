@@ -12,7 +12,6 @@ def my_func():
     """my func"""
     url_n = f'https://jsonplaceholder.typicode.com/users/{sys.argv[1]}/'
     name = json.loads(requests.get(url_n).text).get('name')
-    print(name)
     response = requests.get('https://jsonplaceholder.typicode.com/todos/')
     task_list = json.loads(response.text)
     completed = 0
