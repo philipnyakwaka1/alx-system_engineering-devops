@@ -24,7 +24,7 @@ def my_func():
             tmp = [task['userId'], username,
                    task['completed'], task['title']]
             my_list.append(tmp)
-    with open('USER_ID.csv', 'w') as f:
+    with open(f'{sys.argv[1]}.csv', 'w') as f:
         writer = csv.writer(f)
         writer.writerows(my_list)
 
