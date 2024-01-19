@@ -10,10 +10,8 @@ headers = {
 }
 
 response = requests.get(
-    'https://api.datadoghq.com/api/v1/monitor', headers=headers)
+    'https://api.datadoghq.com/api/v1/dashboard', headers=headers)
 
 if response.status_code == 200:
-    monitors = json.loads(response.text)
-    for monitor in monitors:
-        if monitor.get('name') == 'WRITES PER SECOND':
-            print('WPS is monitored')
+    dashboards = json.loads(response.text)
+    print(dashboards)
