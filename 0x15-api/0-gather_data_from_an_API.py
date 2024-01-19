@@ -28,7 +28,7 @@ def my_func():
                 total += 1
     print(f'Employee {name} is done with tasks({completed}/{total}):')
     for title in titles:
-        print(f'\t{title}')
+        print(f'\t {title}')
 
 
 if __name__ == '__main__':
