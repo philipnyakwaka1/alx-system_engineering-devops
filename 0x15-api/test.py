@@ -1,4 +1,3 @@
 my_dict = {'age': 25}
-my_dict['age'] += 1
-my_dict['name'] = 'philip'
-print(my_dict.values())
+my_dict.update({'name': 'Philip'})
+print(my_dict)
