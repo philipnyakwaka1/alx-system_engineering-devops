@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#mysqldum backup
+ARCHIVE_NAME="$(date +'%d-%m-%Y').tar.gz"
+sudo mysqldump -u root -p"$1" --all-databases | sudo tee backup.sql
+tar -czvf "$ARCHIVE_NAME" backup.sql
