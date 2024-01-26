@@ -1,6 +1,10 @@
 server {
-        listen 80;
+        listen 0.0.0.0:80;
+        listen [::]:80;
         server_name 18.206.232.169;
+
+        add_header X-Served-By 319114-web-01;
+
 
         location /airbnb-onepage/ {
                 include proxy_params;
@@ -9,4 +13,3 @@ server {
     }
 
 }
-
